@@ -21,13 +21,15 @@ On a Windows machine:
 1. Run `pipx upgrade poetry` to update to the latest version.
 1. Run `poetry completions bash >> ~/.bash_completion` to add `poetry` to the shell.
 
-## Installing esentials
+## Installing "esentials"
 
 1. Optionally, install NeoVim by running `sudo apt install neovim`. To run NeoVim type `nvim` on the CLI.
 1. Install `git` by running `sudo apt-get install git-all`.
+1. Run `git config --global user.name "<your_username>"` and `git config global user.email "your@email.address"` to set-up git configuration details.
+1. Follow the instructions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) to create a GitHub *fine-grained personal access token*. This will be used to gain access to your GitHub repositories.
 
 # General instructions to create project
 
 1. It's highly recommended to `mkdir dev` so that the projects are not directly on your `home` directory. This is just good practice, and not a must.
-1. Run `cd dev` followed by `git clone <project_url>`. Get your `<project_url>` from from your [GitHub](https://github.com) account.
+1. Run `cd dev` followed by `git clone <project_url>`. Get your `<project_url>` from from your [GitHub](https://github.com) account. **IMPORTANT** - when cloaning use your *fine-grained personall access token* instead of a password
 1. Enjoy ;-)
