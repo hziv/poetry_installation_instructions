@@ -15,7 +15,7 @@ On a Windows (host) machine:
 ## Pre-requisits
 
 1. Follow [instructions](https://pipx.pypa.io/stable/installation) (https://github.com/pypa/pipx) to install `pipx`. Specifically for Ubuntu/Linux, run `sudo apt update && sudo apt upgrade -y`, followed by `sudo apt install pipx` and `pipx ensurepath`.
-1. Run `sudo pipx ensurepath --global` to allow `pipx` actions in global scope.
+1. ~~Run `sudo pipx ensurepath --global` to allow `pipx` actions in global scope.~~
 1. On Ubuntu/Linux run `eval "$(register-python-argcomplete pipx)"` to add `pipx` to the shell.
 1. Run `pipx install poetry` to install `pipx`.
 1. Run `pipx upgrade poetry` to update to the latest version.
