@@ -1,10 +1,10 @@
 # Poetry Installation Instructions
 
-Poetry installation instructions on a bare Ubuntu machine.
+Poetry installation instructions on a bare Ubuntu (guest) machine, including all required steps.
 
-# Setting up
+# Setting up guest system
 
-On a Windows (host) machine:
+On the Windows (host) machine:
 
 1. download the latest [Ubuntu Desktop](https://ubuntu.com/download/desktop) `iso` file.
 1. download [Oracle VirtualBox](https://www.virtualbox.org) installation `exe`cutable.
@@ -45,8 +45,255 @@ Rational - this is required in order to be able to set up the GitHub account acc
 1. Follow the instructions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) to create a GitHub *fine-grained personal access token*. This will be used to gain access to your GitHub repositories.
 1. Store the *token* in a secure place, and use it in place of a password when `cloan`ing into the guest machine.
 
-# General instructions to create project
+# General instructions to prepare project
 
 1. It's highly recommended to `mkdir dev` so that the projects are not directly on your `home` directory. This is just good practice, and not a must.
 1. Run `cd dev` followed by `git clone <project_url>`. Get your `<project_url>` from from your [GitHub](https://github.com) account. **IMPORTANT** - when cloaning use your *fine-grained personall access token* instead of a password
-1. Enjoy ;-)
+1. Below are step-by-step instructions on how to install and use Poetry, a dependency management and packaging tool for Python, to create a project environment and work on it effectively.
+
+---
+
+### **Step 1: Install Poetry**
+
+Poetry is a Python tool for managing dependencies, packaging, and publishing Python projects. Here's how to install it.
+
+#### 1.1. **Install Poetry using the official installer**
+
+The recommended method to install Poetry is through their official installation script. Open a terminal (or command prompt) and run the following command:
+
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+This will download and run the installer script. The script will install the latest version of Poetry for your system.
+
+#### 1.2. **Verify the Installation**
+
+Once the installation is complete, you can verify that Poetry has been installed correctly by checking its version:
+
+```bash
+poetry --version
+```
+
+If Poetry is installed correctly, you should see something like:
+
+```
+Poetry version 1.x.x
+```
+
+---
+
+### **Step 2: Set Up a New Poetry Project**
+
+#### 2.1. **Create a New Project with Poetry**
+
+To create a new Python project, navigate to the directory where you want the project to reside and run the following command:
+
+```bash
+poetry new my_project
+```
+
+This will create a new directory `my_project` with a basic project structure, including a `pyproject.toml` file which is used to manage the project’s dependencies and other settings.
+
+For example, the created project structure will look like:
+
+```
+my_project/
+    ├── my_project/
+    │   └── __init__.py
+    ├── pyproject.toml
+    └── tests/
+        └── __init__.py
+```
+
+- `pyproject.toml`: This is the main configuration file for the project.
+- `my_project/`: Contains your main Python package.
+- `tests/`: Contains default test files.
+
+#### 2.2. **Understanding `pyproject.toml`**
+
+The `pyproject.toml` file defines the project’s metadata and dependencies. For instance, it might look like this:
+
+```toml
+[tool.poetry]
+name = "my_project"
+version = "0.1.0"
+description = "A simple Python project."
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
+```
+
+- `[tool.poetry]`: Metadata about your project, such as its name, version, and author.
+- `[tool.poetry.dependencies]`: Lists the runtime dependencies for your project.
+- `[tool.poetry.dev-dependencies]`: Lists the development dependencies, such as testing frameworks.
+
+---
+
+### **Step 3: Install Project Dependencies**
+
+#### 3.1. **Activate the Virtual Environment**
+
+Poetry automatically creates and manages a virtual environment for your project. You can install your dependencies by running:
+
+```bash
+cd my_project  # Navigate into your project directory
+poetry install  # Install all dependencies listed in pyproject.toml
+```
+
+Poetry will create a virtual environment specifically for this project, separate from the global Python environment. It will also install any dependencies defined in the `pyproject.toml` file.
+
+#### 3.2. **Activate the Virtual Environment Manually (Optional)**
+
+You can activate the virtual environment manually with the following command:
+
+```bash
+poetry shell
+```
+
+This activates the Poetry-managed virtual environment, and you'll be able to run Python commands and install additional dependencies in the isolated environment.
+
+#### 3.3. **Add New Dependencies**
+
+If you need to add new dependencies, you can use the `poetry add` command. For example:
+
+```bash
+poetry add requests
+```
+
+This will install the `requests` library and update your `pyproject.toml` and `poetry.lock` files automatically.
+
+To add a development dependency (e.g., `pytest`):
+
+```bash
+poetry add --dev pytest
+```
+
+#### 3.4. **Remove Dependencies**
+
+If you want to remove a dependency, use:
+
+```bash
+poetry remove requests
+```
+
+This will uninstall `requests` and update your `pyproject.toml` and `poetry.lock` files.
+
+---
+
+### **Step 4: Use the Virtual Environment for Development**
+
+#### 4.1. **Start Coding**
+
+Once the environment is set up and dependencies are installed, you can start developing your project. Your Python code will reside in the `my_project/` directory, and you can write code in files like `my_project/my_project.py`.
+
+For example, you might edit `my_project/my_project.py` to include the following:
+
+```python
+def greet(name):
+    return f"Hello, {name}!"
+```
+
+#### 4.2. **Run Python Code from the Virtual Environment**
+
+To run your Python code while the virtual environment is active, you can simply use the Python interpreter:
+
+```bash
+python my_project/my_project.py
+```
+
+Alternatively, if you have installed additional dependencies (e.g., `requests`), you can import and use them in your code as needed.
+
+#### 4.3. **Run Tests (Optional)**
+
+If you have test cases (e.g., inside the `tests/` folder), you can use `pytest` to run them:
+
+```bash
+poetry run pytest
+```
+
+This runs your tests within the Poetry-managed environment, ensuring that any dependencies required for testing are available.
+
+---
+
+### **Step 5: Lock and Publish Your Project (Optional)**
+
+#### 5.1. **Locking Dependencies**
+
+Poetry automatically generates a `poetry.lock` file that records the exact versions of dependencies installed. This file ensures that the same versions of dependencies are installed across all environments (e.g., other developers or production).
+
+You can manually update the `poetry.lock` file using:
+
+```bash
+poetry lock
+```
+
+#### 5.2. **Publishing a Package (Optional)**
+
+If you want to publish your project to the Python Package Index (PyPI), you can use the following commands:
+
+1. **Build the package**:
+
+    ```bash
+    poetry build
+    ```
+
+2. **Publish the package**:
+
+    ```bash
+    poetry publish --build
+    ```
+
+You’ll need to authenticate with your PyPI credentials when publishing.
+
+---
+
+### **Step 6: Managing Multiple Projects or Virtual Environments**
+
+Poetry allows you to manage multiple Python projects without conflicts. Each project will have its own virtual environment, making it easy to switch between them.
+
+To manage environments, you can use:
+
+- **Activate environment for the current project**:
+
+    ```bash
+    poetry shell
+    ```
+
+- **Deactivate the environment**:
+
+    Simply type `exit` or close the terminal.
+
+---
+
+### **Additional Poetry Commands**
+
+Here are a few other useful commands:
+
+- **Check the status of dependencies**:
+
+    ```bash
+    poetry show
+    ```
+
+- **Get help on any command**:
+
+    ```bash
+    poetry help <command>
+    ```
+
+- **Update dependencies**:
+
+    ```bash
+    poetry update
+    ```
+
+- **Show detailed dependency tree**:
+
+    ```bash
+    poetry show --tree
+    ```
