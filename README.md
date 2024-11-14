@@ -8,7 +8,7 @@ On a Windows (host) machine:
 
 1. download the latest [Ubuntu Desktop](https://ubuntu.com/download/desktop) `iso` file.
 1. download [Oracle VirtualBox](https://www.virtualbox.org) installation `exe`cutable.
-1. inestall the Oracle VirtualBox and point the installation to the Ubuntu `iso` file.
+1. install the Oracle VirtualBox and point the installation to the Ubuntu `iso` file.
 
 # Preparing Ubuntu machine (guest)
 
