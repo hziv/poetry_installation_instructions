@@ -33,6 +33,9 @@ Rational - this is required in order to be able to set up the GitHub account acc
 1. If the above is not `enabled`, start it manually by running `sudo systemctl enable ssh --now`. Now confirm by running step's 2 & 3 above again.
 1. To **Open SSH port in Firewall** - on the guest Linux machine run `sudo lsof -i -P -n | grep LISTEN` to get a list of open ports.
 1. If in the above result you can't find **port 22**, open the port manually by running `sudo ufw allow ssh` and `sudo ufw status verbose`.
+1. **VirtualBox network settings** - In the VirtualBox app on the host machine, allow the SSH connection by navigating to the *VirtualBox settings --> Network* and confirm the *Attached to:* setting is set to *NAT*. Then click the *Port Forwarding* button and set the following settings - Name: `ssh`, Protocol: `TCP`, Host Port: `2222`, Guest port: `22`. The *IP* fields can be left empty.
+1. To **Install SSH client** - in the guest Linux machine install the OpenSSH client by running `sudo apt install openssh-client`.
+1. You can now connect from the host machine into the guest machine either by PuTTY (with the following settings - *Host Name*: `localhost`, *Port*: `2222`, *Connection Type*: `SSH`).
 
 ### Further essentials
 
@@ -40,9 +43,6 @@ Rational - this is required in order to be able to set up the GitHub account acc
 1. Install `git` by running `sudo apt-get install git-all`.
 1. Run `git config --global user.name "<your_username>"` and `git config global user.email "your@email.address"` to set-up git configuration details.
 1. Follow the instructions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) to create a GitHub *fine-grained personal access token*. This will be used to gain access to your GitHub repositories.
-1. In the VirtualBox app on the host machine, allow the SSH connection by navigating to the *VirtualBox settings --> Network* and confirm the *Attached to:* setting is set to *NAT*. Then click the *Port Forwarding* button and set the following settings - Name: `ssh`, Protocol: `TCP`, Host Port: `2222`, Guest port: `22`. The *IP* fields can be left empty.
-1. In the guest Linux machine install the OpenSSH client by running `sudo apt install openssh-client`.
-1. You can now connect from the host machine into the guest machine either by PuTTY (with the following settings - *Host Name*: `localhost`, *Port*: `2222`, *Connection Type*: `SSH`).
 
 # General instructions to create project
 
