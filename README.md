@@ -43,6 +43,7 @@ Rational - this is required in order to be able to set up the GitHub account acc
 1. Install `git` by running `sudo apt-get install git-all`.
 1. Run `git config --global user.name "<your_username>"` and `git config global user.email "your@email.address"` to set-up git configuration details.
 1. Follow the instructions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) to create a GitHub *fine-grained personal access token*. This will be used to gain access to your GitHub repositories.
+1. Store the *token* in a secure place, and use it in place of a password when `cloan`ing into the guest machine.
 
 # General instructions to create project
 
