@@ -297,3 +297,131 @@ Here are a few other useful commands:
     ```bash
     poetry show --tree
     ```
+
+---
+
+#### 1.4. **Install Dependencies (Optional)**
+
+If you want to add external dependencies for your package, you can use:
+
+```bash
+poetry add <dependency-name>
+```
+
+For example, if you wanted to add `requests` as a dependency:
+
+```bash
+poetry add requests
+```
+
+---
+
+### **Step 2: Build and Publish the Python Package**
+
+#### 2.1. **Build the Package**
+
+Once your library is ready, you can build it into a distributable format. Run the following command:
+
+```bash
+poetry build
+```
+
+This will create distribution archives (usually `.tar.gz` and `.whl` files) in the `dist/` folder.
+
+#### 2.3. **Local Installation (Optional)**
+
+If you don’t want to publish the library to PyPI yet but want to install it locally, you can install the package directly from your local directory. In the `my_library` directory, run:
+
+```bash
+poetry install
+```
+
+This will install the package in your local Poetry environment.
+
+---
+
+### **Step 3: Use Your Package in Another Project**
+
+Once the library is ready, you can use it in another project by either publishing it to PyPI or installing it locally.
+
+#### 3.1. **Create Another Project Using Poetry**
+
+In a new directory, you can create another project:
+
+```bash
+poetry new my_app
+cd my_app
+```
+
+This will create the `my_app` project with a basic structure, similar to what you did in the previous steps.
+
+#### 3.2. **Add Your Library as a Dependency**
+
+##### **Option 2: Install from a Local Directory (Without Publishing)**
+
+If you want to install the library locally without publishing it to PyPI, you can add it as a dependency in the `pyproject.toml` file.
+
+For example, if the `my_library` package is located in `/path/to/my_library`, you can run:
+
+```bash
+poetry add ../path/to/my_library
+```
+
+Alternatively, you can manually edit the `pyproject.toml` to include the relative path to your local package:
+
+```toml
+[tool.poetry.dependencies]
+my_library = { path = "../path/to/my_library" }
+```
+
+After that, run:
+
+```bash
+poetry install
+```
+
+Poetry will install the local version of `my_library` from the specified path.
+
+#### 3.3. **Using the Library in Your Code**
+
+Now you can use `my_library` in your project code. For example, edit `my_app/my_app.py` to use the `greet` function from `my_library`:
+
+```python
+# my_app/my_app.py
+
+from my_library.my_library import greet
+
+def main():
+    print(greet("World"))
+
+if __name__ == "__main__":
+    main()
+```
+
+You can then run your project:
+
+```bash
+python my_app/my_app.py
+```
+
+This should output:
+
+```
+Hello, World!
+```
+
+---
+
+### **Step 4: Development with Your Library**
+
+During development, if you're actively working on `my_library`, you can install it in "editable" mode in your new project to reflect changes immediately.
+
+In the `my_app` project directory, you can install the library in editable mode by running:
+
+```bash
+poetry add ../path/to/my_library --editable
+```
+
+This way, changes to the code in `my_library` will immediately be reflected in your `my_app` project without needing to reinstall the package each time.
+
+---
