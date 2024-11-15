@@ -425,3 +425,45 @@ poetry add ../path/to/my_library --editable
 This way, changes to the code in `my_library` will immediately be reflected in your `my_app` project without needing to reinstall the package each time.
 
 ---
+
+### Adding a GitHub Dependency
+
+1. **Directly from a Repository**:
+   You can specify the GitHub URL of the package:
+
+   ```toml
+   [tool.poetry.dependencies]
+   my-package = { git = "https://github.com/username/repository.git" }
+   ```
+
+2. **From a Specific Tag or Branch**:
+   You can also specify abranch:
+
+   ```toml
+   [tool.poetry.dependencies]
+   my-package = { git = "https://github.com/username/repository.git", branch = "main" }
+   ```
+
+3. **Private Repositories**:
+   If the repository is private, you'll need to ensure that Poetry can authenticate. This can typically be done by setting up an SSH key or using a personal access token in the URL:
+
+   ```toml
+   [tool.poetry.dependencies]
+   my-package = { git = "ssh://git@github.com/username/repository.git" }
+   ```
+
+   Or:
+
+   ```toml
+   [tool.poetry.dependencies]
+   my-package = { git = "https://username:token@github.com/username/repository.git" }
+   ```
+
+### Installing the Dependency
+Once you've updated your `pyproject.toml`, you can run:
+
+```bash
+poetry install
+```
+
+This will fetch the dependency from the specified GitHub repository and add it to your project environment.
